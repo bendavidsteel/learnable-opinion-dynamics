@@ -1,6 +1,8 @@
+import os
+
 import bz2
 
-DATASET_PATH = "../../data/reddit/"
+DATASET_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "data", "reddit")
 
 class AutoId:
     def __init__(self):
@@ -35,7 +37,7 @@ def read_reddit(T=120, T_test_min=None, T_test_max=None):
     u_v_t_weights = []
     u_v_test = []
 
-    for t, u_name, v_name, w in _read_file(DATASET_PATH + "edges_user.tsv.bz2"):
+    for t, u_name, v_name, w in _read_file(os.path.join(DATASET_PATH, "edges_user.tsv.bz2")):
         if t < T:
             u_v_t_weights.append((user2id[u_name], user2id[v_name], t, w))
     user2id = user2id.map
